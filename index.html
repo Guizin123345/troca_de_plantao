@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Troca de Plantão</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+</head>
+<body>
+    <h1>Solicitação de Troca e Destroca de Plantão</h1>
+    <form id="form">
+        <!-- Solicitação de Troca de Plantão -->
+        <section>
+            <h2>SOLICITAÇÃO DE TROCA DE PLANTÃO</h2>
+            <label for="nome_solicitante">Eu, <input type="text" id="nome_solicitante" name="nome_solicitante" placeholder="Nome do solicitante" required> portador (a) do CPF <input type="text" id="cpf_solicitante" name="cpf_solicitante" placeholder="CPF do solicitante" required> colaborador (a) desta empresa na função de Bombeiro Civil venho através deste, pedir autorização para troca de plantão no dia <input type="date" id="data_troca" name="data_troca" required>. Este plantão será coberto pelo também colaborador (a) <input type="text" id="nome_substituto" name="nome_substituto" placeholder="Nome do substituto" required>, função Bombeiro Civil, portador (a) do CPF <input type="text" id="cpf_substituto" name="cpf_substituto" placeholder="CPF do substituto" required>.</label>
+        </section>
+
+        <!-- Solicitação de Destroca de Plantão -->
+        <section>
+            <h2>SOLICITAÇÃO DE DESTROCA DE PLANTÃO</h2>
+            <label for="nome_solicitante_destroca">Eu, <input type="text" id="nome_solicitante_destroca" name="nome_solicitante_destroca" placeholder="Nome do solicitante" required> portador (a) do CPF <input type="text" id="cpf_solicitante_destroca" name="cpf_solicitante_destroca" placeholder="CPF do solicitante" required> colaborador (a) desta empresa na função de Bombeiro Civil venho através deste, pedir autorização para destroca de plantão a ser realizada no dia <input type="date" id="data_destroca" name="data_destroca" required>. Este plantão será coberto pelo também colaborador (a) <input type="text" id="nome_substituto_destroca" name="nome_substituto_destroca" placeholder="Nome do substituto" required>, função Bombeiro Civil, portador (a) do CPF <input type="text" id="cpf_substituto_destroca" name="cpf_substituto_destroca" placeholder="CPF do substituto" required>.</label>
+        </section>
+
+        <!-- Data da solicitação -->
+        <section>
+            <label for="data_solicitacao">Data da solicitação: <input type="date" id="data_solicitacao" name="data_solicitacao" required></label>
+        </section>
+
+        <section>
+            <label for="ass_solicitante">Assinatura (Solicitante):</label>
+            <canvas id="signature-pad-solicitante" class="signature-pad" width="400" height="150"></canvas>
+            <button type="button" onclick="clearSignature('signature-pad-solicitante')">Limpar</button>
+        </section>
+        
+        <!-- Assinatura do Substituto -->
+        <section>
+            <label for="ass_substituto">Assinatura (Substituto):</label>
+            <canvas id="signature-pad-substituto" class="signature-pad" width="400" height="150"></canvas>
+            <button type="button" onclick="clearSignature('signature-pad-substituto')">Limpar</button>
+        </section>
+
+        <!-- Plantão -->
+        <section>
+            <h2>PLANTÃO</h2>
+            <label for="plantao">Plantão:</label>
+            <select id="plantao" name="plantao" required>
+                <option value="">selecione</option>
+                <option value="diurno">Diurno</option>
+                <option value="noturno">Noturno</option>
+            </select>
+
+            <label for="data_troca_plantao">Data da Troca:</label>
+            <input type="date" id="data_troca_plantao" name="data_troca_plantao" required>
+
+            <label for="hora_inicio_troca">Hora Início:</label>
+            <select id="hora_inicio_troca" name="hora_inicio_troca" required>
+                <option value="">selecione</option>
+                <option value="06h">06h</option>
+                <option value="06h30m">06h30m</option>
+                <option value="07h">07h</option>
+                <option value="18h">18h</option>
+                <option value="18h30m">18h30m</option>
+                <option value="19h">19h</option>
+                <option value="10h">10h</option>
+            </select>
+
+            <label for="hora_termino_troca">Hora Término:</label>
+            <select id="hora_termino_troca" name="hora_termino_troca" required>
+                <option value="">selecione</option>
+                <option value="18h">18h</option>
+                <option value="18h30m">18h30m</option>
+                <option value="19h">19h</option>
+                <option value="06h">06h</option>
+                <option value="06h30m">06h30m</option>
+                <option value="07h">07h</option>
+                <option value="22h">22h</option>
+            </select>
+        </section>
+
+        <!-- Destroca -->
+        <section>
+            <h2>DESTROCA</h2>
+            <label for="data_destroca">Data da Destroca:</label>
+            <input type="date" id="data_destroca" name="data_destroca" required>
+
+            <label for="hora_inicio_destroca">Hora Início:</label>
+            <select id="hora_inicio_destroca" name="hora_inicio_destroca" required>
+                <option value="">selecione</option>
+                <option value="06h">06h</option>
+                <option value="06h30m">06h30m</option>
+                <option value="07h">07h</option>
+                <option value="18h">18h</option>
+                <option value="18h30m">18h30m</option>
+                <option value="19h">19h</option>
+                <option value="10h">10h</option>
+            </select>
+
+            <label for="hora_termino_destroca">Hora Término:</label>
+            <select id="hora_termino_destroca" name="hora_termino_destroca" required>
+                <option value="">selecione</option>
+                <option value="18h">18h</option>
+                <option value="18h30m">18h30m</option>
+                <option value="19h">19h</option>
+                <option value="06h">06h</option>
+                <option value="06h30m">06h30m</option>
+                <option value="07h">07h</option>
+                <option value="22h">22h</option>
+            </select>
+        </section>
+
+        <div class="button-container">
+            <button type="submit" class="gerar-pdf">Gerar PDF</button>
+        </div>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
